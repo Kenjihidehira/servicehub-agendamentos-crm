@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="760" viewBox="0 0 1280 760" role="img" aria-label="Preview do dashboard ServiceHub">
+  <rect width="1280" height="760" fill="#f5f7fb"/>
+  <rect width="252" height="760" fill="#111827"/>
+  <rect x="26" y="30" width="42" height="42" rx="8" fill="#0f766e"/>
+  <text x="41" y="58" fill="#ffffff" font-family="Arial" font-size="22" font-weight="700">S</text>
+  <text x="84" y="48" fill="#ffffff" font-family="Arial" font-size="18" font-weight="700">ServiceHub</text>
+  <text x="84" y="68" fill="#94a3b8" font-family="Arial" font-size="12">Agenda + CRM</text>
+  <rect x="22" y="122" width="208" height="42" rx="8" fill="#263244"/>
+  <text x="42" y="149" fill="#ffffff" font-family="Arial" font-size="14" font-weight="700">Dashboard</text>
+  <text x="300" y="64" fill="#647086" font-family="Arial" font-size="12" font-weight="700">OPERACAO COMERCIAL</text>
+  <text x="300" y="104" fill="#172033" font-family="Arial" font-size="32" font-weight="700">Central de agendamentos, clientes e cobrancas</text>
+  <rect x="1090" y="54" width="142" height="42" rx="8" fill="#0f766e"/>
+  <text x="1114" y="81" fill="#ffffff" font-family="Arial" font-size="14" font-weight="700">Gerar lembretes</text>
+  <g font-family="Arial">
+    <rect x="300" y="146" width="170" height="108" rx="8" fill="#ffffff" stroke="#dce3ee"/>
+    <text x="318" y="178" fill="#647086" font-size="13">Previsao de receita</text>
+    <text x="318" y="213" fill="#172033" font-size="26" font-weight="700">R$ 16.762</text>
+    <text x="318" y="236" fill="#647086" font-size="12">agenda + funil</text>
+    <rect x="486" y="146" width="170" height="108" rx="8" fill="#ffffff" stroke="#dce3ee"/>
+    <text x="504" y="178" fill="#647086" font-size="13">Confirmados</text>
+    <text x="504" y="213" fill="#172033" font-size="26" font-weight="700">2</text>
+    <text x="504" y="236" fill="#647086" font-size="12">atendimentos ativos</text>
+    <rect x="672" y="146" width="170" height="108" rx="8" fill="#ffffff" stroke="#dce3ee"/>
+    <text x="690" y="178" fill="#647086" font-size="13">Pendentes</text>
+    <text x="690" y="213" fill="#172033" font-size="26" font-weight="700">2</text>
+    <text x="690" y="236" fill="#647086" font-size="12">precisam follow-up</text>
+    <rect x="858" y="146" width="170" height="108" rx="8" fill="#ffffff" stroke="#dce3ee"/>
+    <text x="876" y="178" fill="#647086" font-size="13">Em atraso</text>
+    <text x="876" y="213" fill="#172033" font-size="26" font-weight="700">R$ 2.450</text>
+    <text x="876" y="236" fill="#647086" font-size="12">cobranca prioritaria</text>
+    <rect x="1044" y="146" width="170" height="108" rx="8" fill="#ffffff" stroke="#dce3ee"/>
+    <text x="1062" y="178" fill="#647086" font-size="13">Ocupacao</text>
+    <text x="1062" y="213" fill="#172033" font-size="26" font-weight="700">14%</text>
+    <text x="1062" y="236" fill="#647086" font-size="12">capacidade semanal</text>
+  </g>
+  <rect x="300" y="286" width="610" height="406" rx="8" fill="#ffffff" stroke="#dce3ee"/>
+  <text x="326" y="328" fill="#647086" font-family="Arial" font-size="12" font-weight="700">AGENDA</text>
+  <text x="326" y="358" fill="#172033" font-family="Arial" font-size="22" font-weight="700">Proximos atendimentos</text>
+  <g font-family="Arial">
+    <rect x="326" y="386" width="558" height="72" rx="8" fill="#ffffff" stroke="#dce3ee"/>
+    <text x="344" y="416" fill="#172033" font-size="16" font-weight="700">Studio Bella Forma</text>
+    <text x="344" y="438" fill="#647086" font-size="13">Pacote mensal de limpeza de pele</text>
+    <rect x="790" y="409" width="76" height="25" rx="12" fill="#15803d"/>
+    <text x="804" y="426" fill="#ffffff" font-size="12" font-weight="700">confirmed</text>
+    <rect x="326" y="474" width="558" height="72" rx="8" fill="#ffffff" stroke="#dce3ee"/>
+    <text x="344" y="504" fill="#172033" font-size="16" font-weight="700">ClimaMax Assistencia</text>
+    <text x="344" y="526" fill="#647086" font-size="13">Revisao preventiva de ar-condicionado</text>
+    <rect x="802" y="497" width="64" height="25" rx="12" fill="#fde68a"/>
+    <text x="814" y="514" fill="#422006" font-size="12" font-weight="700">pending</text>
+  </g>
+  <rect x="936" y="286" width="278" height="196" rx="8" fill="#ffffff" stroke="#dce3ee"/>
+  <text x="960" y="328" fill="#647086" font-family="Arial" font-size="12" font-weight="700">MARKETING</text>
+  <text x="960" y="358" fill="#172033" font-family="Arial" font-size="22" font-weight="700">ROI por canal</text>
+  <rect x="960" y="390" width="230" height="8" rx="4" fill="#e5e7eb"/>
+  <rect x="960" y="390" width="180" height="8" rx="4" fill="#f59e0b"/>
+  <text x="960" y="426" fill="#172033" font-family="Arial" font-size="15" font-weight="700">WhatsApp</text>
+  <text x="960" y="448" fill="#647086" font-family="Arial" font-size="13">34 leads | ROI 34x</text>
+  <rect x="936" y="506" width="278" height="186" rx="8" fill="#ffffff" stroke="#dce3ee"/>
+  <text x="960" y="548" fill="#647086" font-family="Arial" font-size="12" font-weight="700">PIPELINE</text>
+  <text x="960" y="578" fill="#172033" font-family="Arial" font-size="22" font-weight="700">Oportunidades</text>
+  <text x="960" y="622" fill="#172033" font-family="Arial" font-size="15" font-weight="700">Plano recorrente B2B</text>
+  <rect x="960" y="644" width="230" height="8" rx="4" fill="#e5e7eb"/>
+  <rect x="960" y="644" width="170" height="8" rx="4" fill="#f59e0b"/>
+</svg>

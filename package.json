@@ -1,0 +1,21 @@
+{
+  "name": "servicehub-agendamentos-crm",
+  "version": "1.0.0",
+  "description": "CRM operacional com agenda, funil, cobrancas e automacoes simuladas para negocios de servicos.",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "test": "node --test tests/*.test.js",
+    "smoke": "node tests/smoke.js"
+  },
+  "keywords": [
+    "crm",
+    "agendamentos",
+    "dashboard",
+    "api",
+    "automacao",
+    "portfolio"
+  ],
+  "author": "Wesley Hidehira",
+  "license": "MIT"
+}

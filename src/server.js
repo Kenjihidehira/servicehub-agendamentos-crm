@@ -152,13 +152,13 @@ function serveStatic(req, res) {
   const filePath = path.normalize(path.join(PUBLIC_DIR, safePath));
   if (!filePath.startsWith(PUBLIC_DIR)) {
     res.writeHead(403);
-    res.end("Forbidden");
+    res.end("Proibido");
     return;
   }
   fs.readFile(filePath, (error, content) => {
     if (error) {
       res.writeHead(404, { "content-type": "text/plain; charset=utf-8" });
-      res.end("Not found");
+      res.end("Nao encontrado");
       return;
     }
     res.writeHead(200, { "content-type": MIME_TYPES[path.extname(filePath)] ?? "application/octet-stream" });

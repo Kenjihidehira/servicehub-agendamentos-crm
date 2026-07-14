@@ -1,7 +1,7 @@
 {
   "name": "servicehub-agendamentos-crm",
   "version": "1.0.0",
-  "description": "CRM operacional com agenda, funil, cobrancas e automacoes simuladas para negocios de servicos.",
+  "description": "CRM operacional com agenda, funil, cobranças e automações simuladas para negócios de serviços.",
   "main": "src/server.js",
   "scripts": {
     "start": "node src/server.js",

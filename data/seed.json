@@ -3,7 +3,7 @@
     {
       "id": "cus_1001",
       "name": "Studio Bella Forma",
-      "segment": "estetica",
+      "segment": "estética",
       "contact": "Marina Costa",
       "phone": "+55 44 98888-1001",
       "email": "marina@bellainterna.example",
@@ -12,8 +12,8 @@
     },
     {
       "id": "cus_1002",
-      "name": "ClimaMax Assistencia",
-      "segment": "manutencao",
+      "name": "ClimaMax Assistência",
+      "segment": "manutenção",
       "contact": "Rafael Nunes",
       "phone": "+55 44 97777-1002",
       "email": "rafael@climamax.example",
@@ -23,7 +23,7 @@
     {
       "id": "cus_1003",
       "name": "Odonto Prime Centro",
-      "segment": "saude",
+      "segment": "saúde",
       "contact": "Dra. Ana Lemos",
       "phone": "+55 44 96666-1003",
       "email": "ana@odontoprime.example",
@@ -56,7 +56,7 @@
     {
       "id": "apt_9002",
       "customerId": "cus_1002",
-      "service": "Revisao preventiva de ar-condicionado",
+      "service": "Revisão preventiva de ar-condicionado",
       "scheduledAt": "2026-07-08T15:30:00-03:00",
       "durationMinutes": 90,
       "professional": "Caio",
@@ -78,7 +78,7 @@
     {
       "id": "apt_9004",
       "customerId": "cus_1004",
-      "service": "Diagnostico pre-compra",
+      "service": "Diagnóstico pré-compra",
       "scheduledAt": "2026-07-09T11:00:00-03:00",
       "durationMinutes": 75,
       "professional": "Bruno",
@@ -89,7 +89,7 @@
     {
       "id": "apt_9005",
       "customerId": "cus_1001",
-      "service": "Sessao de drenagem",
+      "service": "Sessão de drenagem",
       "scheduledAt": "2026-07-10T14:00:00-03:00",
       "durationMinutes": 60,
       "professional": "Juliana",
@@ -120,7 +120,7 @@
     {
       "id": "deal_503",
       "customerId": "cus_1003",
-      "title": "Reativacao de pacientes inativos",
+      "title": "Reativação de pacientes inativos",
       "stage": "discovery",
       "value": 5300,
       "probability": 0.41,

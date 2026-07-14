@@ -59,7 +59,7 @@ function enrichAppointments(db) {
   return db.appointments
     .map(appointment => ({
       ...appointment,
-      customer: customers.get(appointment.customerId)?.name ?? "Cliente nao encontrado"
+      customer: customers.get(appointment.customerId)?.name ?? "Cliente não encontrado"
     }))
     .sort((a, b) => new Date(a.scheduledAt) - new Date(b.scheduledAt));
 }
@@ -119,7 +119,7 @@ function buildAutomationQueue(db) {
       channel: appointment.channel === "WhatsApp" ? "whatsapp" : "email",
       template: appointment.status === "pending" ? "confirmacao_agendamento" : "lembrete_24h",
       scheduledFor: appointment.scheduledAt,
-      preview: `Ola, ${appointment.customer}. Seu atendimento ${appointment.service} esta marcado para ${formatDateTime(appointment.scheduledAt)}.`
+      preview: `Olá, ${appointment.customer}. Seu atendimento ${appointment.service} está marcado para ${formatDateTime(appointment.scheduledAt)}.`
     }));
 }
 
@@ -138,10 +138,10 @@ function validateAppointment(input) {
     return `Campos obrigatorios ausentes: ${missing.join(", ")}.`;
   }
   if (Number(input.durationMinutes) <= 0 || Number(input.price) < 0) {
-    return "Duracao e preco precisam ser numeros validos.";
+    return "Duração e preço precisam ser números válidos.";
   }
   if (Number.isNaN(new Date(input.scheduledAt).getTime())) {
-    return "scheduledAt precisa ser uma data ISO valida.";
+    return "scheduledAt precisa ser uma data ISO válida.";
   }
   return null;
 }
@@ -158,7 +158,7 @@ function serveStatic(req, res) {
   fs.readFile(filePath, (error, content) => {
     if (error) {
       res.writeHead(404, { "content-type": "text/plain; charset=utf-8" });
-      res.end("Nao encontrado");
+      res.end("Não encontrado");
       return;
     }
     res.writeHead(200, { "content-type": MIME_TYPES[path.extname(filePath)] ?? "application/octet-stream" });
@@ -204,7 +204,7 @@ function createServer(db = loadDatabase()) {
           return;
         }
         if (!db.customers.some(customer => customer.id === payload.customerId)) {
-          createJsonResponse(res, 404, { error: "Cliente nao encontrado." });
+          createJsonResponse(res, 404, { error: "Cliente não encontrado." });
           return;
         }
         const appointment = {
@@ -228,7 +228,7 @@ function createServer(db = loadDatabase()) {
         const payload = await readBody(req);
         const appointment = db.appointments.find(item => item.id === statusMatch[1]);
         if (!appointment) {
-          createJsonResponse(res, 404, { error: "Agendamento nao encontrado." });
+          createJsonResponse(res, 404, { error: "Agendamento não encontrado." });
           return;
         }
         if (!["pending", "confirmed", "completed", "cancelled"].includes(payload.status)) {
@@ -253,13 +253,13 @@ function createServer(db = loadDatabase()) {
       if (url.pathname === "/api/automations/reminders" && req.method === "POST") {
         createJsonResponse(res, 202, {
           queued: buildAutomationQueue(db),
-          note: "Simulacao: nenhuma mensagem real foi enviada."
+          note: "Simulação: nenhuma mensagem real foi enviada."
         });
         return;
       }
 
       if (url.pathname.startsWith("/api/")) {
-        createJsonResponse(res, 404, { error: "Endpoint nao encontrado." });
+        createJsonResponse(res, 404, { error: "Endpoint não encontrado." });
         return;
       }
 

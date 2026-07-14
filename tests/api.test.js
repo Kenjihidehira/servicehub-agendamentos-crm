@@ -27,7 +27,7 @@ test("calcula indicadores comerciais principais", () => {
   assert.equal(metrics.channelRoi.find(item => item.channel === "WhatsApp").roi, 34);
 });
 
-test("gera fila de automacao sem enviar mensagens reais", () => {
+test("gera fila de automação sem enviar mensagens reais", () => {
   const queue = buildAutomationQueue(clone(seed));
   assert.ok(queue.length >= 3);
   assert.equal(queue.every(job => job.preview.includes("Seu atendimento")), true);

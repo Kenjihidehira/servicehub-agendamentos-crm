@@ -8,6 +8,30 @@ const dateTime = new Intl.DateTimeFormat("pt-BR", {
   timeStyle: "short"
 });
 
+const statusLabels = {
+  pending: "Pendente",
+  confirmed: "Confirmado",
+  completed: "Concluído",
+  cancelled: "Cancelado"
+};
+
+const stageLabels = {
+  proposal: "Proposta",
+  negotiation: "Negociação",
+  discovery: "Descoberta"
+};
+
+const channelLabels = {
+  Indication: "Indicação",
+  whatsapp: "WhatsApp",
+  email: "E-mail"
+};
+
+const templateLabels = {
+  confirmacao_agendamento: "Confirmação de agendamento",
+  lembrete_24h: "Lembrete de 24 horas"
+};
+
 async function api(path, options = {}) {
   const response = await fetch(path, {
     headers: { "content-type": "application/json" },
@@ -26,11 +50,11 @@ function metric(label, value, helper) {
 async function renderMetrics() {
   const data = await api("/api/metrics");
   document.querySelector("#metrics").innerHTML = [
-    metric("Previsao de receita", currency.format(data.revenueForecast), "agenda + funil ponderado"),
+    metric("Previsão de receita", currency.format(data.revenueForecast), "agenda + funil ponderado"),
     metric("Confirmados", data.confirmedAppointments, "atendimentos ativos"),
-    metric("Pendentes", data.pendingAppointments, "precisam follow-up"),
-    metric("Em atraso", currency.format(data.overdueAmount), "cobranca prioritaria"),
-    metric("Ocupacao", `${Math.round(data.occupancyRate * 100)}%`, "capacidade semanal")
+    metric("Pendentes", data.pendingAppointments, "precisam de acompanhamento"),
+    metric("Em atraso", currency.format(data.overdueAmount), "cobrança prioritária"),
+    metric("Ocupação", `${Math.round(data.occupancyRate * 100)}%`, "capacidade semanal")
   ].join("");
 
   document.querySelector("#channels").innerHTML = data.channelRoi
@@ -39,7 +63,7 @@ async function renderMetrics() {
       const roi = channel.roi === null ? "Organico" : `${channel.roi}x`;
       return `
         <div class="channel">
-          <strong>${channel.channel}</strong>
+          <strong>${channelLabels[channel.channel] ?? channel.channel}</strong>
           <div class="muted">${channel.leads} leads | ${channel.appointments} agendas | ROI ${roi}</div>
           <div class="bar"><span style="width:${ratio}%"></span></div>
         </div>
@@ -63,9 +87,9 @@ async function renderAppointments() {
         </div>
         <div>
           <strong>${currency.format(appointment.price)}</strong>
-          <span class="muted">${appointment.channel}</span>
+          <span class="muted">${channelLabels[appointment.channel] ?? appointment.channel}</span>
         </div>
-        <span class="pill ${appointment.status}">${appointment.status}</span>
+        <span class="pill ${appointment.status}">${statusLabels[appointment.status] ?? appointment.status}</span>
       </div>
     `)
     .join("");
@@ -77,7 +101,7 @@ async function renderPipeline() {
     .map(deal => `
       <div class="deal">
         <strong>${deal.title}</strong>
-        <div class="muted">${deal.stage} | ${currency.format(deal.value)} | ${Math.round(deal.probability * 100)}%</div>
+        <div class="muted">${stageLabels[deal.stage] ?? deal.stage} | ${currency.format(deal.value)} | ${Math.round(deal.probability * 100)}%</div>
         <div class="bar"><span style="width:${Math.round(deal.probability * 100)}%"></span></div>
       </div>
     `)
@@ -89,7 +113,7 @@ async function createDemoAppointment() {
     method: "POST",
     body: JSON.stringify({
       customerId: "cus_1002",
-      service: "Visita tecnica emergencial",
+      service: "Visita técnica emergencial",
       scheduledAt: "2026-07-10T16:30:00-03:00",
       durationMinutes: 80,
       professional: "Caio",
@@ -106,7 +130,7 @@ async function runReminders() {
     .map(job => `
       <div class="automation-job">
         <strong>${job.customer}</strong>
-        <div class="muted">${job.channel} | ${job.template} | ${dateTime.format(new Date(job.scheduledFor))}</div>
+        <div class="muted">${channelLabels[job.channel] ?? job.channel} | ${templateLabels[job.template] ?? job.template} | ${dateTime.format(new Date(job.scheduledFor))}</div>
         <p>${job.preview}</p>
       </div>
     `)

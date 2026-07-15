@@ -1,0 +1,183 @@
+{
+  "customers": [
+    {
+      "id": "cus_1001",
+      "name": "Studio Bella Forma",
+      "segment": "estética",
+      "contact": "Marina Costa",
+      "phone": "+55 44 98888-1001",
+      "email": "marina@bellainterna.example",
+      "status": "active",
+      "lifetimeValue": 18640
+    },
+    {
+      "id": "cus_1002",
+      "name": "ClimaMax Assistência",
+      "segment": "manutenção",
+      "contact": "Rafael Nunes",
+      "phone": "+55 44 97777-1002",
+      "email": "rafael@climamax.example",
+      "status": "active",
+      "lifetimeValue": 29450
+    },
+    {
+      "id": "cus_1003",
+      "name": "Odonto Prime Centro",
+      "segment": "saúde",
+      "contact": "Dra. Ana Lemos",
+      "phone": "+55 44 96666-1003",
+      "email": "ana@odontoprime.example",
+      "status": "at_risk",
+      "lifetimeValue": 42120
+    },
+    {
+      "id": "cus_1004",
+      "name": "AutoCheck Express",
+      "segment": "automotivo",
+      "contact": "Diego Martins",
+      "phone": "+55 44 95555-1004",
+      "email": "diego@autocheck.example",
+      "status": "lead",
+      "lifetimeValue": 0
+    }
+  ],
+  "appointments": [
+    {
+      "id": "apt_9001",
+      "customerId": "cus_1001",
+      "service": "Pacote mensal de limpeza de pele",
+      "scheduledAt": "2026-07-08T13:00:00-03:00",
+      "durationMinutes": 60,
+      "professional": "Juliana",
+      "status": "confirmed",
+      "price": 280,
+      "channel": "WhatsApp"
+    },
+    {
+      "id": "apt_9002",
+      "customerId": "cus_1002",
+      "service": "Revisão preventiva de ar-condicionado",
+      "scheduledAt": "2026-07-08T15:30:00-03:00",
+      "durationMinutes": 90,
+      "professional": "Caio",
+      "status": "pending",
+      "price": 450,
+      "channel": "Google Ads"
+    },
+    {
+      "id": "apt_9003",
+      "customerId": "cus_1003",
+      "service": "Retorno ortodontico",
+      "scheduledAt": "2026-07-09T09:00:00-03:00",
+      "durationMinutes": 45,
+      "professional": "Fernanda",
+      "status": "confirmed",
+      "price": 190,
+      "channel": "Indication"
+    },
+    {
+      "id": "apt_9004",
+      "customerId": "cus_1004",
+      "service": "Diagnóstico pré-compra",
+      "scheduledAt": "2026-07-09T11:00:00-03:00",
+      "durationMinutes": 75,
+      "professional": "Bruno",
+      "status": "pending",
+      "price": 320,
+      "channel": "Instagram"
+    },
+    {
+      "id": "apt_9005",
+      "customerId": "cus_1001",
+      "service": "Sessão de drenagem",
+      "scheduledAt": "2026-07-10T14:00:00-03:00",
+      "durationMinutes": 60,
+      "professional": "Juliana",
+      "status": "completed",
+      "price": 210,
+      "channel": "WhatsApp"
+    }
+  ],
+  "pipeline": [
+    {
+      "id": "deal_501",
+      "customerId": "cus_1004",
+      "title": "Contrato mensal de diagnosticos",
+      "stage": "proposal",
+      "value": 4200,
+      "probability": 0.62,
+      "owner": "Comercial 1"
+    },
+    {
+      "id": "deal_502",
+      "customerId": "cus_1002",
+      "title": "Plano recorrente B2B",
+      "stage": "negotiation",
+      "value": 8900,
+      "probability": 0.74,
+      "owner": "Comercial 2"
+    },
+    {
+      "id": "deal_503",
+      "customerId": "cus_1003",
+      "title": "Reativação de pacientes inativos",
+      "stage": "discovery",
+      "value": 5300,
+      "probability": 0.41,
+      "owner": "CS"
+    }
+  ],
+  "invoices": [
+    {
+      "id": "inv_7001",
+      "customerId": "cus_1001",
+      "amount": 1280,
+      "dueDate": "2026-07-12",
+      "status": "open"
+    },
+    {
+      "id": "inv_7002",
+      "customerId": "cus_1002",
+      "amount": 2450,
+      "dueDate": "2026-07-02",
+      "status": "overdue"
+    },
+    {
+      "id": "inv_7003",
+      "customerId": "cus_1003",
+      "amount": 1800,
+      "dueDate": "2026-07-18",
+      "status": "open"
+    }
+  ],
+  "marketing": [
+    {
+      "channel": "Google Ads",
+      "spend": 1240,
+      "leads": 28,
+      "appointments": 11,
+      "revenue": 4960
+    },
+    {
+      "channel": "Instagram",
+      "spend": 760,
+      "leads": 19,
+      "appointments": 8,
+      "revenue": 2560
+    },
+    {
+      "channel": "WhatsApp",
+      "spend": 180,
+      "leads": 34,
+      "appointments": 21,
+      "revenue": 6120
+    },
+    {
+      "channel": "Indication",
+      "spend": 0,
+      "leads": 12,
+      "appointments": 9,
+      "revenue": 3420
+    }
+  ]
+}

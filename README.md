@@ -1,8 +1,20 @@
 # ServiceHub Agendamentos CRM
 
+[![CI](https://github.com/Kenjihidehira/servicehub-agendamentos-crm/actions/workflows/ci.yml/badge.svg)](https://github.com/Kenjihidehira/servicehub-agendamentos-crm/actions/workflows/ci.yml)
+[![Demo pública](https://img.shields.io/badge/demo-pública-0f766e)](https://servicehub-crm-ops.dadosepesquisa.chatgpt.site)
+
 CRM operacional para negócios de serviços que precisam controlar agenda, clientes, funil comercial, cobranças e lembretes de atendimento em um único painel.
 
 ![Prévia do painel](docs/dashboard-preview.svg)
+
+## Prova comercial publicada
+
+- **Demo:** [servicehub-crm-ops.dadosepesquisa.chatgpt.site](https://servicehub-crm-ops.dadosepesquisa.chatgpt.site)
+- **Autenticação:** consulta pública do cenário de demonstração e alterações protegidas por Sign in with ChatGPT.
+- **Persistência:** agenda, cobranças e automações são persistidas em workspace D1 isolado por usuário.
+- **Contrato hospedado:** `GET /api/state` consulta o workspace e `POST /api/state` valida e executa ações comerciais.
+- **Entrega:** CI, build Vinext, migration reversível e deploy público versionado.
+- **Arquitetura:** [`docs/architecture.md`](docs/architecture.md).
 
 ## Valor comercial
 
@@ -27,6 +39,7 @@ Este projeto simula uma solução vendável para clínicas, assistências técni
 - HTML, CSS e JavaScript puro na interface
 - `node:test` para validação automatizada
 - Dockerfile para publicação em contêiner
+- Vinext/React e Cloudflare D1 na versão comercial hospedada
 
 ## Como rodar localmente
 
@@ -92,6 +105,8 @@ curl -X POST http://localhost:3000/api/appointments \
 
 ## Publicação
 
+A versão comercial está ativa no [OpenAI Sites](https://servicehub-crm-ops.dadosepesquisa.chatgpt.site). O código implantado está em `sites/`, incluindo autenticação, persistência, migration e testes de domínio.
+
 ### Docker
 
 ```bash
@@ -109,13 +124,13 @@ docker run --rm -p 3000:3000 servicehub-agendamentos-crm
 
 - Problema comercial claro: faltas em agenda, baixa conversão, cobranças atrasadas e falta de visão operacional.
 - Demonstra servidor, interface, modelagem de dados, validação de payload e automação simulada.
-- Pode evoluir para multiempresa, autenticação, banco real, integração WhatsApp Business Cloud, pagamentos e calendário externo.
+- Pode evoluir para multiempresa, permissões por papel, integração WhatsApp Business Cloud, pagamentos e calendário externo.
 
 ## Melhorias possíveis
 
-- Persistencia com PostgreSQL ou SQLite.
-- Autenticação com perfis de administrador, comercial e atendimento.
+- Adaptador PostgreSQL para instalações fora do Sites.
+- Permissões granulares para administrador, comercial e atendimento.
 - Integração real com WhatsApp Business Cloud para envio de lembretes.
 - Webhooks de pagamento para baixa automática de cobranças.
 - Exportacao de relatorios em CSV/PDF.
-- Publicação real com banco gerenciado e esteira de integração contínua.
+- Observabilidade centralizada e alertas de falha das automações.

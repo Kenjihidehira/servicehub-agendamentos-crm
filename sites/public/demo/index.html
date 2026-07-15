@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/demo/redesign.css">
   </head>
   <body>
+    <a class="skip-link" href="#dashboard">Ir para o conteudo principal</a>
     <aside class="sidebar">
       <div class="brand">
         <span class="brand-mark">S</span>
@@ -19,35 +20,66 @@
       <nav>
         <a class="active" href="#dashboard">Painel</a>
         <a href="#agenda">Agenda</a>
-        <a href="#clientes">Clientes</a>
+        <a href="#pipeline">Oportunidades</a>
         <a href="#automacoes">Automações</a>
       </nav>
     </aside>
 
-    <main class="app-shell">
+    <main id="dashboard" class="app-shell">
       <header class="topbar">
         <div>
           <p class="eyebrow">Operação comercial</p>
           <h1>Central de agendamentos, clientes e cobranças</h1>
         </div>
-        <button id="run-reminders" type="button">Gerar lembretes</button>
+        <div class="actions">
+          <button id="run-reminders" type="button">Gerar lembretes</button>
+        </div>
       </header>
 
       <section id="metrics" class="metrics-grid" aria-label="Indicadores comerciais"></section>
 
       <section class="content-grid">
-        <article class="panel wide">
-          <div class="panel-header">
+        <article id="agenda" class="panel wide">
+          <div class="panel-header agenda-header">
             <div>
               <p class="eyebrow">Agenda</p>
               <h2>Próximos atendimentos</h2>
+              <p id="appointmentCount" class="result-count">Carregando agenda...</p>
             </div>
-            <button id="new-demo-appointment" type="button">Novo demo</button>
+            <div class="toolbar" role="search" aria-label="Filtrar agenda">
+              <input id="appointmentSearch" type="search" placeholder="Buscar cliente ou servico" autocomplete="off">
+              <select id="appointmentStatus" aria-label="Filtrar por status">
+                <option value="all">Todos os status</option>
+                <option value="pending">Pendente</option>
+                <option value="confirmed">Confirmado</option>
+                <option value="completed">Concluido</option>
+                <option value="cancelled">Cancelado</option>
+              </select>
+              <select id="appointmentSort" aria-label="Ordenar agenda">
+                <option value="date">Data mais proxima</option>
+                <option value="value">Maior valor</option>
+                <option value="customer">Cliente A-Z</option>
+              </select>
+              <button id="clearAppointmentFilters" class="tertiary" type="button">Limpar</button>
+              <button id="new-demo-appointment" type="button">Novo agendamento</button>
+            </div>
           </div>
-          <div id="appointments" class="table-list"></div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Cliente / servico</th>
+                  <th>Data e responsavel</th>
+                  <th>Valor / canal</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="appointments" aria-live="polite" aria-busy="true"></tbody>
+            </table>
+          </div>
         </article>
 
-        <article class="panel">
+        <article id="pipeline" class="panel">
           <div class="panel-header">
             <div>
               <p class="eyebrow">Marketing</p>
@@ -67,7 +99,7 @@
           <div id="pipeline" class="deal-list"></div>
         </article>
 
-        <article class="panel wide">
+        <article id="automacoes" class="panel wide">
           <div class="panel-header">
             <div>
               <p class="eyebrow">Automações</p>

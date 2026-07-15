@@ -5,6 +5,8 @@ const stageLabels = { proposal: "Proposta", negotiation: "Negociacao", discovery
 const channelLabels = { Indication: "Indicacao", whatsapp: "WhatsApp", email: "E-mail" };
 const templateLabels = { confirmacao_agendamento: "Confirmacao de agendamento", lembrete_24h: "Lembrete de 24 horas" };
 let session = { canWrite: false };
+let appointmentsState = [];
+const appointmentFilters = { search: "", status: "all", sort: "date" };
 
 async function api(options = {}) {
   const response = await fetch("/api/state", {
@@ -39,11 +41,28 @@ function renderMetrics(data) {
 }
 
 function renderAppointments(appointments) {
-  document.querySelector("#appointments").innerHTML = appointments.map((appointment) => `
-    <div class="row"><div><strong>${appointment.customer}</strong><span class="muted">${appointment.service}</span></div>
-    <div><strong>${dateTime.format(new Date(appointment.scheduledAt))}</strong><span class="muted">${appointment.professional} | ${appointment.durationMinutes} min</span></div>
-    <div><strong>${currency.format(appointment.price)}</strong><span class="muted">${channelLabels[appointment.channel] ?? appointment.channel}</span></div>
-    <span class="pill ${appointment.status}">${statusLabels[appointment.status] ?? appointment.status}</span></div>`).join("");
+  appointmentsState = appointments;
+  const search = appointmentFilters.search.trim().toLocaleLowerCase("pt-BR");
+  const visible = appointments
+    .filter((appointment) => appointmentFilters.status === "all" || appointment.status === appointmentFilters.status)
+    .filter((appointment) => !search || [appointment.customer, appointment.service, appointment.professional]
+      .some((value) => String(value).toLocaleLowerCase("pt-BR").includes(search)))
+    .sort((left, right) => {
+      if (appointmentFilters.sort === "value") return right.price - left.price;
+      if (appointmentFilters.sort === "customer") return left.customer.localeCompare(right.customer, "pt-BR");
+      return new Date(left.scheduledAt) - new Date(right.scheduledAt);
+    });
+
+  document.querySelector("#appointmentCount").textContent = `${visible.length} de ${appointments.length} atendimentos`;
+  const tableBody = document.querySelector("#appointments");
+  tableBody.setAttribute("aria-busy", "false");
+  tableBody.innerHTML = visible.length ? visible.map((appointment) => `
+    <tr>
+      <td><strong>${appointment.customer}</strong><small>${appointment.service}</small></td>
+      <td><strong>${dateTime.format(new Date(appointment.scheduledAt))}</strong><small>${appointment.professional} | ${appointment.durationMinutes} min</small></td>
+      <td><strong>${currency.format(appointment.price)}</strong><small>${channelLabels[appointment.channel] ?? appointment.channel}</small></td>
+      <td><span class="pill ${appointment.status}">${statusLabels[appointment.status] ?? appointment.status}</span></td>
+    </tr>`).join("") : '<tr><td class="empty-state" colspan="4"><strong>Nenhum atendimento encontrado</strong><span>Ajuste os filtros para recuperar a agenda.</span></td></tr>';
 }
 
 function renderPipeline(deals) {
@@ -82,14 +101,59 @@ async function runAction(action) {
     window.location.href = session.signInUrl;
     return;
   }
-  render(await api({ method: "POST", body: JSON.stringify({ action }) }));
+  setBusy(true);
+  try {
+    render(await api({ method: "POST", body: JSON.stringify({ action }) }));
+  } finally {
+    setBusy(false);
+  }
+}
+
+function setBusy(isBusy) {
+  document.querySelector("#appointments").setAttribute("aria-busy", String(isBusy));
+  for (const button of document.querySelectorAll("#run-reminders, #new-demo-appointment")) button.disabled = isBusy;
+}
+
+function debounce(callback, delay = 220) {
+  let timeout;
+  return (...args) => {
+    window.clearTimeout(timeout);
+    timeout = window.setTimeout(() => callback(...args), delay);
+  };
+}
+
+function refreshAppointmentView() {
+  renderAppointments(appointmentsState);
 }
 
 document.querySelector("#new-demo-appointment").addEventListener("click", () => runAction("create_demo_appointment").catch(showError));
 document.querySelector("#run-reminders").addEventListener("click", () => runAction("run_reminders").catch(showError));
+document.querySelector("#appointmentSearch").addEventListener("input", debounce((event) => {
+  appointmentFilters.search = event.target.value;
+  refreshAppointmentView();
+}));
+document.querySelector("#appointmentStatus").addEventListener("change", (event) => {
+  appointmentFilters.status = event.target.value;
+  refreshAppointmentView();
+});
+document.querySelector("#appointmentSort").addEventListener("change", (event) => {
+  appointmentFilters.sort = event.target.value;
+  refreshAppointmentView();
+});
+document.querySelector("#clearAppointmentFilters").addEventListener("click", () => {
+  Object.assign(appointmentFilters, { search: "", status: "all", sort: "date" });
+  document.querySelector("#appointmentSearch").value = "";
+  document.querySelector("#appointmentStatus").value = "all";
+  document.querySelector("#appointmentSort").value = "date";
+  refreshAppointmentView();
+});
 
 function showError(error) {
-  document.querySelector("#automation-output").textContent = error.message;
+  setBusy(false);
+  const output = document.querySelector("#automation-output");
+  output.innerHTML = '<div class="error-message" role="alert"><strong>Falha na operacao</strong><p></p></div>';
+  output.querySelector("p").textContent = error.message;
 }
 
-api().then(render).catch(showError);
+setBusy(true);
+api().then(render).catch(showError).finally(() => setBusy(false));
